@@ -1,7 +1,4 @@
 import { z } from 'zod';
-import { ScriptRequest } from '@workspace/shared';
-
-export type { ScriptRequest } from '@workspace/shared';
 
 // Request validation schema
 export const ScriptRequestSchema = z.object({
@@ -9,3 +6,11 @@ export const ScriptRequestSchema = z.object({
   details: z.string().default(""),
   technologies: z.array(z.string()).default([]),
 });
+
+// Type for script generation request
+export type ScriptRequest = z.infer<typeof ScriptRequestSchema>;
+
+// Type for script generation response
+export interface ScriptResponse {
+  script: string;
+}
