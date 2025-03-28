@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Script to create a new app in the monorepo
+# Usage: ./bin/add-app [app-name]
+
+node scripts/create-app.js "$@"

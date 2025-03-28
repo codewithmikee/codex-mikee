@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "jsx": "preserve",
+    "composite": true,
+    "declaration": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@workspace/*": ["./packages/*"]
+    }
+  },
+  "include": [],
+  "exclude": ["node_modules", "dist", "build", "**/*.test.ts"],
+  "references": [
+    { "path": "./packages/config" },
+    { "path": "./packages/ui" },
+    { "path": "./packages/shared" },
+    { "path": "./apps/shell-ui" },
+    { "path": "./servers/shell-ai" }
+  ]
+}

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Script to create a new server in the monorepo
+# Usage: ./bin/add-server [server-name]
+
+node scripts/create-server.js "$@"

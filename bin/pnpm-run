@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Script to run custom pnpm commands
+# Usage: ./bin/pnpm-run <command> [args...]
+
+COMMAND="$1"
+shift  # Remove the first argument
+
+case "$COMMAND" in
+  "add:app")
+    node scripts/create-app.js "$@"
+    ;;
+  "add:server")
+    node scripts/create-server.js "$@"
+    ;;
+  "add:package")
+    node scripts/create-package.js "$@"
+    ;;
+  *)
+    echo "Unknown command: $COMMAND"
+    echo "Available commands:"
+    echo "  add:app <app-name>     - Create a new Next.js app"
+    echo "  add:server <server-name> - Create a new Express.js server"
+    echo "  add:package <package-name> - Create a new shared package"
+    exit 1
+    ;;
+esac

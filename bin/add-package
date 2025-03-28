@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Script to create a new package in the monorepo
+# Usage: ./bin/add-package [package-name]
+
+node scripts/create-package.js "$@"
