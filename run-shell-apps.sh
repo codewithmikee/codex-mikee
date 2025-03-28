@@ -9,7 +9,7 @@ sleep 1
 
 # Start the shell-ai server in the background
 echo "Starting shell-ai server..."
-cd servers/shell-ai && npx tsx src/index.ts &
+cd servers/shell-ai && pnpm tsx src/index.ts &
 SHELL_AI_PID=$!
 
 # Wait for shell-ai to start
@@ -18,7 +18,7 @@ sleep 3
 
 # Start the main application
 echo "Starting main application..."
-npm run dev
+cd ../.. && pnpm run dev
 
 # Kill the shell-ai server when the main app is stopped
 echo "Shutting down shell-ai server..."
