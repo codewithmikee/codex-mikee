@@ -1,0 +1,98 @@
+ 
+✅ Replit AI Instruction (Full Version)
+
+# 🧠 Replit AI Monorepo Instruction for AI Projects
+
+## 📦 Monorepo Tech Stack
+
+- All backend services must use:
+  - **Express.js**
+  - **TypeScript**
+  - **src/** folder structure
+
+- All frontend apps must use:
+  - **Next.js (App Router)**
+  - **TypeScript**
+  - **pnpm**
+  - **TailwindCSS + ShadCN UI** (UI components live in `packages/ui`)
+  - **src/** folder structure
+
+## 🗂 Folder Structure
+
+ai-workspace/
+├── apps/               # Frontend applications (Next.js)
+│   └── shell-ui/
+│       └── src/
+├── servers/            # Standalone backend services (Express.js)
+│   └── shell-ai/
+│       └── src/
+├── packages/
+│   ├── backend/        # Reusable backend-only logic
+│   ├── frontend/       # Shared frontend logic
+│   ├── shared/         # App-backend shared logic
+│   ├── config/         # Shared tsconfig/eslint/tailwind config
+│   └── ui/             # ShadCN UI components
+│       └── src/
+├── package.json
+├── pnpm-workspace.yaml
+└── tsconfig.json
+
+## 📌 Alias Import Rules
+
+- **Cross-package imports:** use `@workspace/...`
+- **Local project imports:** use `@/...`  
+- **Backend internals:** use `@types`, `@utils`, etc.
+
+🧠 Examples:
+```ts
+// Good
+import { Button } from '@workspace/ui';
+import { parseShell } from '@/utils/parseShell'; // inside shell-ai/src
+import type { ShellRequest } from '@workspace/types';
+
+📦 All packages must:
+	•	Use src/
+	•	Have a src/index.ts that exports everything inside
+	•	Provide a package.json with name and "main": "dist/index.js", "types": "dist/index.d.ts"
+
+🛠 TypeScript Config
+
+Use strict mode, declaration output, rootDir/outDir, paths aliases, and composite mode for packages.
+
+Every subproject must extend from the root tsconfig.json.
+
+📝 README Rules
+
+Every main folder (apps/, servers/, packages/) must include a detailed README:
+	•	Describe its purpose, structure, usage
+	•	Document how to add new folders
+	•	For each AI-related folder, include learning-oriented explanations, prompts, and architecture insights
+
+🧪 Initial Shell Test Case
+
+You may scaffold just one:
+	•	servers/shell-ai/: Express backend with /generate-script endpoint
+	•	apps/shell-ui/: Next.js frontend with instruction input and shell preview (skip Tauri and storage for now)
+
+🚀 Feature Conditions
+
+Setup should allow:
+	•	Building or deploying a single app or server
+	•	Independent test & lint scripts per workspace
+
+✅ Your Job
+
+Replit AI (or dev assistant), generate:
+	•	The full folder structure
+	•	Boilerplate code (with best practices)
+	•	README files
+	•	Example generate-script feature
+	•	Correct tsconfig and alias setup
+	•	And make it all learnable for a new dev
+ 
+# Additional things to consider
+- use git 
+- break the instruction into tasks and create task tracker. and on each task group complete commit 
+- use shell app for showcase and I must test using it so needs to add the script to run it 
+- shadcnui add component should work as expected in packages folder where shadcnui ui packages are there
+- pnpm and typescript are very important
