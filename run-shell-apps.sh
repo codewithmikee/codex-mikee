@@ -1,40 +1,25 @@
 #!/bin/bash
 
-# Install dependencies for shell-ui
-echo "Installing dependencies for shell-ui..."
-cd apps/shell-ui
-npm install --quiet
+# Kill any existing node processes
+# echo "Killing existing node processes..."
+# pkill -f node || true
 
-# Install dependencies for shell-ai
-echo "Installing dependencies for shell-ai..."
-cd ../../servers/shell-ai
-npm install --quiet
+# Wait for ports to be released
+sleep 1
 
-# Start shell-ui (Next.js frontend)
-echo "Starting shell-ui (Next.js frontend)..."
-cd ../../apps/shell-ui && npx next dev -p 5000 &
-SHELL_UI_PID=$!
-
-# Start shell-ai (Express.js backend)
-echo "Starting shell-ai (Express.js backend)..."
-cd ../../servers/shell-ai && npx tsx watch src/index.ts &
+# Start the shell-ai server in the background
+echo "Starting shell-ai server..."
+cd servers/shell-ai && npx tsx src/index.ts &
 SHELL_AI_PID=$!
 
-# Define cleanup function to kill both processes on exit
-cleanup() {
-  echo "Stopping applications..."
-  kill $SHELL_UI_PID
-  kill $SHELL_AI_PID
-  exit 0
-}
+# Wait for shell-ai to start
+echo "Waiting for shell-ai server to start..."
+sleep 3
 
-# Register cleanup function to run on exit signal
-trap cleanup SIGINT SIGTERM
+# Start the main application
+echo "Starting main application..."
+npm run dev
 
-# Show running applications
-echo "Both applications are running:"
-echo "- Shell UI (Frontend): Running on port 5000"
-echo "- Shell API (Backend): Check logs for port information"
-
-# Wait for both processes to finish
-wait $SHELL_UI_PID $SHELL_AI_PID
+# Kill the shell-ai server when the main app is stopped
+echo "Shutting down shell-ai server..."
+kill $SHELL_AI_PID

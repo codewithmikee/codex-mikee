@@ -54,8 +54,9 @@ export default function Home() {
   const generateScriptMutation = useMutation({
     mutationFn: async (values: ScriptFormValues) => {
       const { newTechnology, ...data } = values;
+      // Make sure we're using the correct port for the shell-ai service
       const response = await apiRequest<{ script: string }>({
-        url: "http://localhost:8000/api/generate-script",
+        url: `/api/generate-script`, // Use a relative URL to avoid CORS issues
         method: "POST",
         data,
       });
